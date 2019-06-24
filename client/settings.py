@@ -25,7 +25,7 @@ SECRET_KEY = 'tk&*@o2@yd(&de&n=0d1_l$hlvt4ly2c-^l5tle6g@29jnra%d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','.faymek.top']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','39.100.121.105']
 
 
 # Application definition

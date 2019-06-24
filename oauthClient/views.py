@@ -14,7 +14,7 @@ def authorize(request):
                             params={
                                 "grant_type": "authorization_code",
                                 "code": request.GET['code'],
-                                "redirect_uri": "http://127.0.0.1:8000/oauth/authorize",
+                                "redirect_uri": "http://39.100.121.105/oauth/authorize",
                                 "client_id": "6igXEhGusBZsIuxHkmWN",
                                 "client_secret": "988F890BA1B5CBAB58E5C7F298610B6D9498E05BCEBF7C67"
                             })
