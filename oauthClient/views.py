@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect
 import json, requests, jwt
+import sqlite3, time
 
 # Create your views here.
 def client(request):
@@ -21,9 +22,18 @@ def authorize(request):
         r2.encoding = 'utf-8'
         datas = json.loads(r2.text)
         info = jwt.decode(datas["id_token"], verify=False)
-        print(info)
+
+        conn = sqlite3.connect('/home/faymek/oauth-client/oauthClient/test.db')
+        c = conn.cursor()
+        t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        c.execute("INSERT INTO Student VALUES (?,?,?,?,?,?)", (None, t, info["sub"], info["name"], info["type"], info["code"]))
+        conn.commit()
+        c.close()
+        conn.close()
+
         return HttpResponseRedirect('http://youth.sjtu.edu.cn/a/verify.htm?id='+info['sub'])
     except Exception as e:
+        print(e)
         return HttpResponse('error')
     # return redirect('/oauth/test')
         # return HttpResponseRedirect('http://192.168.10.18:8002/oauth/server?callback=192.168.10.18:8001/oauth/client')
@@ -31,3 +41,4 @@ def authorize(request):
 
 def test(request):
     return render(request, 'test.html', locals())
+

@@ -1,9 +1,10 @@
-import requests
-import json
+import sqlite3
 
-datas = {'access_token': '7541343adfe464d1c88788d5c98dd762'}
-r3 = requests.get(url='https://api.sjtu.edu.cn/v1/me/profile',                headers={'Authorization': 'Bearer '+ datas["access_token"]},)
-r3.encoding = 'utf-8'
-mydatas = json.loads(r3.text)
-print(r3)
-
+conn = sqlite3.connect('test.db')
+c = conn.cursor()
+c.execute("select * from Student")
+values = c.fetchall()
+print(values)
+c.close()
+conn.commit()
+conn.close()
